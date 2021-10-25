@@ -52,6 +52,30 @@ app.post('/records', (req, res) => {
     .catch(err => console.log(err))
 })
 
+app.get('/records/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Record.findById(id)
+    .lean()
+    .then(record => {
+      console.log(record)
+      Category.find()
+        .lean()
+        .then(categories => {
+          // 替除掉本來已選的分類後，傳入edit.hbs
+          const restCategories = categories.filter(item => item.name !== record.category)
+          return res.render('edit', { record, restCategories })
+        })
+    })
+    .catch(err => console.log(err))
+})
+
+app.post('/records/:id/edit', (req, res) => {
+  const _id = req.params.id
+  return Record.findOneAndUpdate({ _id }, {$set: req.body})
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 app.listen(3000, () => {
   console.log('App is running on http://localhost:3000')
 })
