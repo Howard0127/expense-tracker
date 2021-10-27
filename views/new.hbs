@@ -1,56 +1,38 @@
-<div class='row mt-5'>
-  <div class='col-sm-6 m-auto'>
-    <form action="/records" method="POST">
-      <h3 class="text-center mb-5">請輸入你的支出</h3>
-      <div class='form-group row'>
-        <label for='name' class='col-sm-2 col-form-label'>名稱*</label>
-        <div class='col-sm-10'>
-          <input
-            type='text'
-            class='form-control'
-            name='name'
-            id='name'
-            placeholder='請輸入支出名稱'
-            required
-          />
+<div class="container">
+  <div class='row mt-5'>
+    <div class='col-lg-8 m-auto'>
+      <form action="/records" method="POST">
+        <h3 class="text-center mb-5">請輸入你的支出</h3>
+        <div class='form-group row'>
+          <label for='name' class='col-sm-2 col-form-label'>名稱*</label>
+          <div class='col-sm-10'>
+            <input type='text' class='form-control' name='name' id='name' placeholder='請輸入支出名稱' required />
+          </div>
         </div>
-      </div>
-      <div class='form-group row'>
-        <label for='date' class='col-sm-2 col-form-label'>日期*</label>
-        <div class='col-sm-10'>
-          <input
-            type='date'
-            class='form-control'
-            name='date'
-            id='date'
-            required
-          />
+        <div class='form-group row'>
+          <label for='date' class='col-sm-2 col-form-label'>日期*</label>
+          <div class='col-sm-10'>
+            <input type='date' class='form-control' name='date' id='date' required />
+          </div>
         </div>
-      </div>
-      <div class='form-group row'>
-        <label for='category' class='col-sm-2 col-form-label'>類別*</label>
-        <div class='col-sm-10'>
-          <select class='form-control' name='category' id='category' required>
-            {{#each categories}}
+        <div class='form-group row'>
+          <label for='category' class='col-sm-2 col-form-label'>類別*</label>
+          <div class='col-sm-10'>
+            <select class='form-control' name='category' id='category' required>
+              {{#each categories}}
               <option value='{{ this.name }}'>{{ this.name }}</option>
-            {{/each}}
-          </select>
+              {{/each}}
+            </select>
+          </div>
         </div>
-      </div>
-      <div class='form-group row'>
-        <label for='amount' class='col-sm-2 col-form-label'>金額*</label>
-        <div class='col-sm-10'>
-          <input
-            type='text'
-            class='form-control'
-            name='amount'
-            id='amount'
-            placeholder='請輸入支出金額'
-            required
-          />
+        <div class='form-group row'>
+          <label for='amount' class='col-sm-2 col-form-label'>金額*</label>
+          <div class='col-sm-10'>
+            <input type='text' class='form-control' name='amount' id='amount' placeholder='請輸入支出金額' required />
+          </div>
         </div>
-      </div>
-      <button type='submit' class='btn btn-primary btn-block mt-4'>新增這筆支出</button>
-    </form>
+        <button type='submit' class='btn btn-primary btn-block mt-4'>新增這筆支出</button>
+      </form>
+    </div>
   </div>
 </div>

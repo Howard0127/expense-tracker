@@ -1,8 +1,5 @@
-const mongoose = require('mongoose')
 const Category = require('../category')
-mongoose.connect('mongodb://localhost/expense-tracker')
-
-const db = mongoose.connection
+const db = require('../../config/mongoose')
 
 const categoryData = [
   {
@@ -27,12 +24,7 @@ const categoryData = [
   }
 ]
 
-db.on('error', () => {
-  console.log('mongodb error!')
-})
-
 db.once('open', () => {
-  console.log('mongodb connected!')
   Category.insertMany(categoryData)
   console.log('categorySeeder done!')
 })
