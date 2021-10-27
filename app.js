@@ -76,6 +76,13 @@ app.post('/records/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.post('/records/:id/delete', (req, res) => {
+  const _id = req.params.id
+  return Record.findOneAndRemove({ _id })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 app.listen(3000, () => {
   console.log('App is running on http://localhost:3000')
 })
