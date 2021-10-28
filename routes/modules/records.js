@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Record = require('../../models/record')
-const Category = require('../../models/Category')
+const Category = require('../../models/category')
 
 router.get('/new', (req, res) => {
   Category.find()
@@ -12,12 +12,17 @@ router.get('/new', (req, res) => {
 
 router.post('/', (req, res) => {
   const { name, date, category, amount } = req.body
-  Record.create({
-    name,
-    date,
-    category,
-    amount
-  }) 
+  Category.findOne({ name: category })
+    .then(item => {
+      const icon = item.icon
+      Record.create({
+      name,
+      date,
+      category,
+      amount,
+      icon
+      }) 
+    })
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
 })
@@ -50,6 +55,28 @@ router.delete('/:id', (req, res) => {
   return Record.findOneAndRemove({ _id })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
+})
+
+router.get('/:category', (req, res) => {
+  const category = req.params.category
+  Record.find({ category })
+    .lean()
+    .sort({ date: 'desc' })
+    .then(records => {
+      let totalAmount = 0
+      //找出相對應的icon放到record裡
+      Promise.all(Array.from(records, record => {
+        Category.findOne({ name: record.category })
+          .then(category => record.icon = category.icon)
+        return totalAmount += record.amount
+      }))
+      Category.find()
+        .lean()
+        .then(categories => {
+          return res.render('index', { records, categories, category, totalAmount })
+        })
+    })
+    .catch(err => console.error(err))
 })
 
 module.exports = router

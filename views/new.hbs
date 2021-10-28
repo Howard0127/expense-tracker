@@ -20,7 +20,7 @@
           <div class='col-sm-10'>
             <select class='form-control' name='category' id='category' required>
               {{#each categories}}
-              <option value='{{ this.name }}'>{{ this.name }}</option>
+              <option value={{ this.name }}>{{ this.name }}</option>
               {{/each}}
             </select>
           </div>

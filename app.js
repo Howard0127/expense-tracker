@@ -6,8 +6,6 @@ const methodOverride = require('method-override')
 require('./config/mongoose')
 const routes = require('./routes')
 
-const Record = require('./models/record')
-const Category = require('./models/Category')
 
 const app = express()
 

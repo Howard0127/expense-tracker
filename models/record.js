@@ -17,7 +17,7 @@ const recordSchema = new Schema ({
   category: {
     type: String,
     required: true
-  },
+  }
   // userId: {
   //   type: String,
   //   required: true
